@@ -12,5 +12,4 @@ Imports:
     ggplot2,
     showtext,
     scales
-
-
+RoxygenNote: 7.2.1

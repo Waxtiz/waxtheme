@@ -1,17 +1,3 @@
-#' Wax scales
-#' Personal color palette for ggplot2
-#'
-#' @examples
-#' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
-#' geom_point(size = 4) -> p
-#'
-#' p + scale_color_wax_d()
-#'
-#' @import ggplot2
-#' @import scales
-#'
-#' @export
-
 wax_colours <- list(
   d_pal = c(
             "#45c7c8",
@@ -71,6 +57,13 @@ wax_colours <- list(
   )
 )
 
+#' Color and fill scales basend on wax palette
+#' Personal color palette for ggplot2
+#'
+#' @import ggplot2
+#' @import scales
+#'
+#' @export
 
 wax_palettes <- function(name, n, all_palettes = wax_colours, type = c("discrete", "continuous")) {
   palette <- all_palettes[[name]]
@@ -85,31 +78,36 @@ wax_palettes <- function(name, n, all_palettes = wax_colours, type = c("discrete
   structure(out, name = name, class = "palette")
 }
 
-
+#' @export
 scale_colour_wax_d <- function(name = "d_pal") {
   ggplot2::scale_colour_manual(values = wax_palettes(name,
                                                      type = "discrete"))
 }
 
+#' @export
 scale_fill_wax_d <- function(name = "d_pal") {
   ggplot2::scale_fill_manual(values = wax_palettes(name,
                                                    type = "discrete"))
 }
 
+#' @export
 scale_colour_wax_c <- function(name = "c_single_hue") {
   ggplot2::scale_colour_gradientn(colours = wax_palettes(name = name,
                                                          type = "continuous"))
 }
 
+#' @export
 scale_fill_wax_c <- function(name = "c_single_hue") {
   ggplot2::scale_fill_gradientn(colours = wax_palettes(name = name,
                                                        type = "continuous"))
 }
 
+#' @export
 scale_color_wax_d <- function() {
   scale_colour_wax_d()
 }
 
+#' @export
 scale_color_wax_c <- function() {
   scale_colour_wax_c()
 }
