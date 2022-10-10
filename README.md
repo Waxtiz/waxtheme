@@ -1,6 +1,6 @@
 # Wax theme
 
-Simple personal test for ggplot2
+Simple personal theme and palette for ggplot2
 
 ---
 
