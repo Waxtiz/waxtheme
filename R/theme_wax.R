@@ -8,12 +8,13 @@
 #' p + theme_wax()
 #'
 #' @import ggplot2
-#' @import showtext
+#' @importFrom showtext showtext_auto
+#' @importFrom sysfonts font_add_google
 #'
 #' @export
 
-showtext::font_add_google(name = "Fira Sans", family = "fira-sans")
-showtext::font_add_google(name = "Roboto Slab", family = "roboto-slab")
+sysfonts::font_add_google(name = "Fira Sans", family = "fira-sans")
+sysfonts::font_add_google(name = "Roboto Slab", family = "roboto-slab")
 showtext::showtext_auto()
 
 theme_wax <- function(base_size = 13,
