@@ -1,6 +1,14 @@
 #' Wax theme for ggplot2
 #' Personal theme and typography for ggplot2
 #'
+#'
+#' @param base_size global chart scale
+#' @param family_title Font family for title, subtitle, legend title and axis title
+#' @param family_text Font family for contents
+#' @param color_text Color for font
+#' @param color_grid Color for grid and panel
+#'
+#'
 #' @examples
 #' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 #' geom_point(size = 4) -> p

@@ -60,6 +60,11 @@ wax_colours <- list(
 #' Color and fill scales based on wax palette
 #' Personal color palette for ggplot2
 #'
+#' @param name Name of colors palette ("d_pal" ; "c_binar_pal" ; "c_single_hue").
+#' @param n Number of colors used. If missing, use all palette.
+#' @param all_palettes List of palettes
+#' @param type Option for continuous or discrete type use
+#'
 #' @import ggplot2
 #' @import scales
 #'
@@ -80,6 +85,9 @@ wax_palettes <- function(name, n, all_palettes = wax_colours, type = c("discrete
 
 
 #' Scale discrete colour
+#'
+#' @param name Colormap name
+#'
 #' @export
 scale_colour_wax_d <- function(name = "d_pal") {
   ggplot2::scale_colour_manual(values = wax_palettes(name,
@@ -87,6 +95,9 @@ scale_colour_wax_d <- function(name = "d_pal") {
 }
 
 #' Scale discrete fill
+#'
+#' @param name Colormap name
+#'
 #' @export
 scale_fill_wax_d <- function(name = "d_pal") {
   ggplot2::scale_fill_manual(values = wax_palettes(name,
@@ -94,6 +105,9 @@ scale_fill_wax_d <- function(name = "d_pal") {
 }
 
 #' Scale continuous colour
+#'
+#' @param name Colormap name
+#'
 #' @export
 scale_colour_wax_c <- function(name = "c_single_hue") {
   ggplot2::scale_colour_gradientn(colours = wax_palettes(name = name,
@@ -101,6 +115,9 @@ scale_colour_wax_c <- function(name = "c_single_hue") {
 }
 
 #' Scale continuous fill
+#'
+#' @param name Colormap name
+#'
 #' @export
 scale_fill_wax_c <- function(name = "c_single_hue") {
   ggplot2::scale_fill_gradientn(colours = wax_palettes(name = name,
@@ -108,12 +125,14 @@ scale_fill_wax_c <- function(name = "c_single_hue") {
 }
 
 #' Scale discrete color
+#'
 #' @export
 scale_color_wax_d <- function() {
   scale_colour_wax_d()
 }
 
 #' Scale continous color
+#'
 #' @export
 scale_color_wax_c <- function() {
   scale_colour_wax_c()

@@ -4,12 +4,15 @@ Title: Personal theme, typography and colors for 'ggplot2'
 Version: 0.1
 Date: 2022-10-07
 Author@R: person("Titouan", "Leclerc", email = "t_leclerc@hotmail.fr", role = c("aut", "cre"))
-Depends: R (>= 4.2.1)
-Description: Personal package to standardize graphics
+Depends: R (>= 4.2.0)
+Description: Personal package to standardize graphics.
 License: GPL-3
 Encoding: UTF-8
+Author: Titouan Leclerc [aut, cre]
+Maintainer: Titouan Leclerc <t_leclerc@hotmail.fr>
 Imports:
     ggplot2,
     showtext,
-    scales
+    scales,
+    sysfonts
 RoxygenNote: 7.2.1
