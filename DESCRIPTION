@@ -1,9 +1,16 @@
-Package: MyThemeGgplot
+Package: waxtheme
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Personal theme, typography and colors for 'ggplot2'
+Version: 0.1
 Date: 2022-10-07
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author@R: person("Titouan", "Leclerc", email = "t_leclerc@hotmail.fr", role = c("aut", "cre"))
+Depends: R (>= 4.2.1)
+Description: Personal package to standardize graphics
+License: GPL-3
+Encoding: UTF-8
+Imports:
+    ggplot2,
+    showtext,
+    scales
+
+
