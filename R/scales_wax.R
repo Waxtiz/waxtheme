@@ -57,7 +57,7 @@ wax_colours <- list(
   )
 )
 
-#' Color and fill scales basend on wax palette
+#' Color and fill scales based on wax palette
 #' Personal color palette for ggplot2
 #'
 #' @import ggplot2
@@ -78,35 +78,42 @@ wax_palettes <- function(name, n, all_palettes = wax_colours, type = c("discrete
   structure(out, name = name, class = "palette")
 }
 
+
+#' Scale discrete colour
 #' @export
 scale_colour_wax_d <- function(name = "d_pal") {
   ggplot2::scale_colour_manual(values = wax_palettes(name,
                                                      type = "discrete"))
 }
 
+#' Scale discrete fill
 #' @export
 scale_fill_wax_d <- function(name = "d_pal") {
   ggplot2::scale_fill_manual(values = wax_palettes(name,
                                                    type = "discrete"))
 }
 
+#' Scale continuous colour
 #' @export
 scale_colour_wax_c <- function(name = "c_single_hue") {
   ggplot2::scale_colour_gradientn(colours = wax_palettes(name = name,
                                                          type = "continuous"))
 }
 
+#' Scale continuous fill
 #' @export
 scale_fill_wax_c <- function(name = "c_single_hue") {
   ggplot2::scale_fill_gradientn(colours = wax_palettes(name = name,
                                                        type = "continuous"))
 }
 
+#' Scale discrete color
 #' @export
 scale_color_wax_d <- function() {
   scale_colour_wax_d()
 }
 
+#' Scale continous color
 #' @export
 scale_color_wax_c <- function() {
   scale_colour_wax_c()

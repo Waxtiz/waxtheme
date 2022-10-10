@@ -1,4 +1,4 @@
-#' Wax theme
+#' Wax theme for ggplot2
 #' Personal theme and typography for ggplot2
 #'
 #' @examples
@@ -12,9 +12,9 @@
 #'
 #' @export
 
-font_add_google(name = "Fira Sans", family = "fira-sans")
-font_add_google(name = "Roboto Slab", family = "roboto-slab")
-showtext_auto()
+showtext::font_add_google(name = "Fira Sans", family = "fira-sans")
+showtext::font_add_google(name = "Roboto Slab", family = "roboto-slab")
+showtext::showtext_auto()
 
 theme_wax <- function(base_size = 13,
                       family_title = "roboto-slab",
@@ -23,8 +23,8 @@ theme_wax <- function(base_size = 13,
                       color_text = "#1A2024",
                       color_grid = "#E8E3DC") {
 
-  theme_light(base_size = base_size) %+replace%
-    theme(
+  ggplot2::theme_light(base_size = base_size) %+replace%
+    ggplot2::theme(
       # Text
       text = element_text(family = family_text, size = base_size, color = color_text),
       axis.text = element_text(size = base_size),
