@@ -1,3 +1,7 @@
+sysfonts::font_add_google(name = "Fira Sans", family = "fira-sans")
+sysfonts::font_add_google(name = "Roboto Slab", family = "roboto-slab")
+showtext::showtext_auto()
+
 #' Wax theme for ggplot2
 #' Personal theme and typography for ggplot2
 #'
@@ -5,25 +9,15 @@
 #' @param base_size global chart scale
 #' @param family_title Font family for title, subtitle, legend title and axis title
 #' @param family_text Font family for contents
+#' @param color_title Color for title and subtitle
 #' @param color_text Color for font
 #' @param color_grid Color for grid and panel
-#'
-#'
-#' @examples
-#' ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
-#' geom_point(size = 4) -> p
-#'
-#' p + theme_wax()
 #'
 #' @import ggplot2
 #' @importFrom showtext showtext_auto
 #' @importFrom sysfonts font_add_google
 #'
 #' @export
-
-sysfonts::font_add_google(name = "Fira Sans", family = "fira-sans")
-sysfonts::font_add_google(name = "Roboto Slab", family = "roboto-slab")
-showtext::showtext_auto()
 
 theme_wax <- function(base_size = 13,
                       family_title = "roboto-slab",
