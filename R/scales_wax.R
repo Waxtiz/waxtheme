@@ -1,139 +1,131 @@
 wax_colours <- list(
   d_pal = c(
-            "#45c7c8",
-            "#d04e2c",
-            "#626edd",
-            "#65c653",
-            "#af5dd3",
-            "#579b2f",
-            "#cc4dac",
-            "#45c27f",
-            "#e14b8c",
-            "#448237",
-            "#8451a5",
-            "#abb639",
-            "#6274b9",
-            "#dd862f",
-            "#5fa3da",
-            "#cca43f",
-            "#d08dcf",
-            "#797623",
-            "#ba3560",
-            "#6bbb8e",
-            "#d4424f",
-            "#31947c",
-            "#e58192",
-            "#31784c",
-            "#9a4d78",
-            "#a0b56c",
-            "#ac554f",
-            "#6d733b",
-            "#e0976e",
-            "#9a612b"
+            "#ff6361",
+            "#8b5196",
+            "#ffb140",
+            "#087E8B",
+            "#0B3954",
+            "#DD7373",
+            "#4C5B5C",
+            "#D64550",
+            "#DAEFB3",
+            "#3B3561",
+            "#D1D1D1",
+            "#EAD94C",
+            "#EA1744",
+            "#30BCED",
+            "#DD4B1A",
+            "#EAB464",
+            "#FAAA8D",
+            "#FEEFDD",
+            "#B88E8D",
+            "#351431",
+            "#5F1A57",
+            "#34435E",
+            "#696D7D",
+            "#235789",
+            "#E34A6F"
   ),
   c_binar_pal = c(
-             "#865eac",
-             "#9875b8",
-             "#aa8dc3",
-             "#bca5ce",
-             "#cebeda",
-             "#dfd7e5",
-             "#f1f1f1",
-             "#d9eadd",
-             "#c2e4cb",
-             "#a9ddb8",
-             "#90d7a5",
-             "#75cf93",
-             "#56c881"
+             "#8b5196",
+             "#003f5c",
+             "#ff6361"
   ),
   c_single_hue = c(
              "#003f5c",
-             "#284a78",
-             "#58508d",
              "#8b5196",
-             "#bc5090",
-             "#e4537e",
-             "#ff6361"
+             "#ff6361",
+             "#ffb140"
   )
 )
 
-#' Color and fill scales based on wax palette
-#' Personal color palette for ggplot2
+#' Prepare color palette like viridis methode
 #'
-#' @param name Name of colors palette ("d_pal" ; "c_binar_pal" ; "c_single_hue").
-#' @param n Number of colors used. If missing, use all palette.
-#' @param all_palettes List of palettes
-#' @param type Option for continuous or discrete type use
-#'
-#' @import ggplot2
-#' @import scales
+#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
+#' @param begin The (corrected) hue in [0,1] at which the color map begins.
+#' @param end The (corrected) hue in [0,1] at which the color map ends.
+#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed.
+#' @param option Choice of palette
 #'
 #' @export
-
-wax_palettes <- function(name, n, all_palettes = wax_colours, type = c("discrete", "continuous")) {
-  palette <- all_palettes[[name]]
-  if (missing(n)) {
-    n <- length(palette)
+wax_pal <- function(n, alpha = 1, begin = 0, end = 1, direction = 1, option = "c_single_hue") {
+  if (begin < 0 | begin > 1 | end < 0 | end > 1) {
+    stop("begin and end must be in [0,1]")
   }
-  type <- match.arg(type)
-  out <- switch(type,
-               continuous = grDevices::colorRampPalette(palette)(n),
-               discrete = palette[1:n]
-  )
-  structure(out, name = name, class = "palette")
+  if (abs(direction) != 1) {
+    stop("direction must be 1 or -1")
+  }
+  if (n == 0) {
+    return(character(0))
+  }
+  if (direction == -1) {
+    tmp <- begin
+    begin <- end
+    end <- tmp
+  }
+  map_cols <- wax_colours[[option]]
+  fn_cols <- grDevices::colorRamp(map_cols, space = "Lab", interpolate = "spline")
+  cols <- fn_cols(seq(begin, end, length.out = n)) / 255
+  grDevices::rgb(cols[, 1], cols[, 2], cols[, 3], alpha = alpha)
+}
+
+#' Generate color palette like viridis methode
+#'
+#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
+#' @param begin The (corrected) hue in [0,1] at which the color map begins.
+#' @param end The (corrected) hue in [0,1] at which the color map ends.
+#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed.
+#' @param option Choice of palette
+#'
+#' @export
+wax_pal2 <- function(alpha = 1, begin = 0, end = 1, direction = 1, option = "c_single_hue") {
+  function(n) {
+    wax_pal(n, alpha, begin, end, direction, option)
+  }
+}
+
+#' Scale color from wax_palette
+#'
+#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
+#' @param begin The (corrected) hue in [0,1] at which the color map begins.
+#' @param end The (corrected) hue in [0,1] at which the color map ends.
+#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed.
+#' @param option Choice of palette
+#'
+#' @export
+scale_color_wax <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
+                                discrete = FALSE, option = "c_single_hue") {
+  if (discrete) {
+    discrete_scale("colour", "viridis", wax_pal2(alpha, begin, end, direction, option), ...)
+  } else {
+    scale_color_gradientn(colours = wax_pal(256, alpha, begin, end, direction, option), ...,
+                          guide = guide_colorbar(barwidth = unit(5, 'cm'),
+                                                 title.vjust = 0.9))
+  }
 }
 
 
-#' Scale discrete colour
+#' Scale fill from wax_palette
 #'
-#' @param name Colormap name
+#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
+#' @param begin The (corrected) hue in [0,1] at which the color map begins.
+#' @param end The (corrected) hue in [0,1] at which the color map ends.
+#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed.
+#' @param option Choice of palette
 #'
 #' @export
-scale_colour_wax_d <- function(name = "d_pal") {
-  ggplot2::scale_colour_manual(values = wax_palettes(name,
-                                                     type = "discrete"))
-}
 
-#' Scale discrete fill
-#'
-#' @param name Colormap name
-#'
-#' @export
-scale_fill_wax_d <- function(name = "d_pal") {
-  ggplot2::scale_fill_manual(values = wax_palettes(name,
-                                                   type = "discrete"))
-}
-
-#' Scale continuous colour
-#'
-#' @param name Colormap name
-#'
-#' @export
-scale_colour_wax_c <- function(name = "c_single_hue") {
-  ggplot2::scale_colour_gradientn(colours = wax_palettes(name = name,
-                                                         type = "continuous"))
-}
-
-#' Scale continuous fill
-#'
-#' @param name Colormap name
-#'
-#' @export
-scale_fill_wax_c <- function(name = "c_single_hue") {
-  ggplot2::scale_fill_gradientn(colours = wax_palettes(name = name,
-                                                       type = "continuous"))
-}
-
-#' Scale discrete color
-#'
-#' @export
-scale_color_wax_d <- function() {
-  scale_colour_wax_d()
-}
-
-#' Scale continous color
-#'
-#' @export
-scale_color_wax_c <- function() {
-  scale_colour_wax_c()
+scale_fill_wax <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
+                                discrete = FALSE, option = "c_single_hue") {
+  if (discrete) {
+    discrete_scale("fill", "viridis", wax_pal2(alpha, begin, end, direction, option), ...)
+  } else {
+    scale_fill_gradientn(colours = wax_pal(256, alpha, begin, end, direction, option), ...,
+                         guide = guide_colorbar(barwidth = unit(5, 'cm'),
+                                                title.vjust = 0.9))
+  }
 }
