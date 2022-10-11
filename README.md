@@ -55,6 +55,6 @@ showtext::showtext_auto()
 Alternatively, you can use the default fonts by specifying the `theme = "default"` option in the `theme_wax()` function.
 
 ```r
-p1 + waxtheme::theme_wax(theme = "default") +
-     waxtheme::scale_color_wax_d()
+p1 + waxtheme::theme_wax(theme = "default")
 ```
+
