@@ -22,7 +22,7 @@ ggplot(iris, aes(Sepal.Length, Petal.Length, color = Species)) +
   labs(title = "First, a chart title",
        subtitle = "Below, a subtitle",
        caption = "And finally, a caption text.") -> p1
-
+p1
 p1 + waxtheme::theme_wax() +
      waxtheme::scale_color_wax(discrete = T)
 ```
@@ -34,10 +34,10 @@ df <- data.frame(x = rnorm(10000), y = rnorm(10000))
 ggplot(df, aes(x = x, y = y)) +
   geom_hex() +
   coord_equal() -> p1
-
+p1
 p1 +
   theme_wax()+
-  scale_fill_wax() -> p2
+  scale_fill_wax()
 ```
 ![Rplot02](./readme_files/Rplot02.png)
 
