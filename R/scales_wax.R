@@ -41,7 +41,7 @@ wax_colours <- list(
 
 #' Prepare color palette like viridis methode
 #'
-#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param n The number of colors to be in the palette.
 #' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
 #' @param begin The (corrected) hue in [0,1] at which the color map begins.
 #' @param end The (corrected) hue in [0,1] at which the color map ends.
@@ -72,7 +72,7 @@ wax_pal <- function(n, alpha = 1, begin = 0, end = 1, direction = 1, option = "c
 
 #' Generate color palette like viridis methode
 #'
-#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param n The number of colors to be in the palette.
 #' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
 #' @param begin The (corrected) hue in [0,1] at which the color map begins.
 #' @param end The (corrected) hue in [0,1] at which the color map ends.
@@ -88,12 +88,13 @@ wax_pal2 <- function(alpha = 1, begin = 0, end = 1, direction = 1, option = "c_s
 
 #' Scale color from wax_palette
 #'
-#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param n The number of colors to be in the palette.
 #' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
 #' @param begin The (corrected) hue in [0,1] at which the color map begins.
 #' @param end The (corrected) hue in [0,1] at which the color map ends.
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed.
-#' @param option Choice of palette
+#' @param option Choice of palette.
+#' @param discrete Operator defining the use of the palette (TRUE for discrete, FALSE for continuous).
 #'
 #' @export
 scale_color_wax <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
@@ -110,12 +111,13 @@ scale_color_wax <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
 
 #' Scale fill from wax_palette
 #'
-#' @param n The number of colors (\ge 1) to be in the palette.
+#' @param n The number of colors to be in the palette.
 #' @param alpha The alpha transparency, a number in [0,1], see argument alpha in hsv.
 #' @param begin The (corrected) hue in [0,1] at which the color map begins.
 #' @param end The (corrected) hue in [0,1] at which the color map ends.
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed.
-#' @param option Choice of palette
+#' @param option Choice of palette.
+#' @param discrete Operator defining the use of the palette (TRUE for discrete, FALSE for continuous).
 #'
 #' @export
 
