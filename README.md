@@ -43,7 +43,7 @@ p1 +
 
 ### Fonts
 
-The fonts are previously downloaded using the `sysfonts` package, using:
+The fonts are previously downloaded using the `sysfonts` package :
 
 ```r
 sysfonts::font_add_google(name = "Fira Sans", family = "fira-sans")
